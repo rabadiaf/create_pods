@@ -1,0 +1,9 @@
+---
+- name: Deploy dummy pod to Kubernetes
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Apply Kubernetes manifest using kubectl
+      shell: kubectl apply --validate=false -f /app/k8s/pod.yaml
+      register: output
+      failed_when: output.rc != 0
