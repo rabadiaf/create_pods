@@ -12,7 +12,7 @@
     ignore_errors: true
 
   - name: Apply Kubernetes manifest using kubectl
-    shell: kubectl apply --validate=false -f /app/pod.yaml
+    shell: kubectl apply --validate=false -f pod.yaml
     environment:
       KUBECONFIG: /app/kubeconfig.embedded.yaml
     register: output
