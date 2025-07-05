@@ -13,6 +13,9 @@ RUN mkdir -p /app/k8s
 COPY playbook.yml entrypoint.sh kubeconfig.embedded.yaml /app/
 COPY k8s/pod.yaml /app/k8s/
 
+COPY kubeconfig.embedded.yaml /app/kubeconfig.embedded.yaml
+ENV KUBECONFIG=/app/kubeconfig.embedded.yaml
+
 RUN chmod +x /app/entrypoint.sh
 
 CMD ["/app/entrypoint.sh"]
