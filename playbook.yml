@@ -4,6 +4,6 @@
   connection: local
   tasks:
     - name: Apply Kubernetes manifest using kubectl
-      shell: KUBECONFIG=/app/kubeconfig.embedded.yaml kubectl apply --validate=false -f /app/k8s/pod.yaml    
+      shell: KUBECONFIG=/app/kubeconfig.embedded.yaml kubectl apply --validate=false -f /app/pod.yaml    
       register: output
       failed_when: output.rc != 0
