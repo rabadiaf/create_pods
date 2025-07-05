@@ -11,7 +11,7 @@ WORKDIR /app
 
 RUN mkdir -p /app/
 COPY playbook.yml entrypoint.sh kubeconfig.embedded.yaml /app/
-COPY k8s/pod.yaml /app/
+COPY pod.yaml /app/
 
 ENV KUBECONFIG=/app/kubeconfig.embedded.yaml
 
