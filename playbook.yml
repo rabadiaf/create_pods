@@ -1,18 +1,15 @@
 ---
-- name: Delete existing dummy-pod if exists
-  shell: KUBECONFIG=/app/kubeconfig.embedded.yaml kubectl delete pod dummy-pod --ignore-not-found
-  ignore_errors: true
-
-- name: Deploy dummy pod to Kubernetes
+- name: Manage dummy pod on Kubernetes
   hosts: localhost
   connection: local
+  gather_facts: false
+
   tasks:
-    - name: Delete existing dummy-pod if exists 
+    - name: Delete existing dummy-pod if exists
       shell: KUBECONFIG=/app/kubeconfig.embedded.yaml kubectl delete pod dummy-pod --ignore-not-found
       ignore_errors: true
 
     - name: Apply Kubernetes manifest using kubectl
-      shell: KUBECONFIG=/app/kubeconfig.embedded.yaml kubectl apply --validate=false -f /app/pod.yaml    
+      shell: KUBECONFIG=/app/kubeconfig.embedded.yaml kubectl apply --validate=false -f /app/pod.yaml
       register: output
       failed_when: output.rc != 0
-
