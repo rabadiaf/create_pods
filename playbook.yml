@@ -5,11 +5,15 @@
   gather_facts: false
 
   tasks:
-    - name: Delete existing dummy-pod if exists
-      shell: KUBECONFIG=/app/kubeconfig.embedded.yaml kubectl delete pod dummy-pod --ignore-not-found
-      ignore_errors: true
+  - name: Delete existing dummy-pod if exists
+    shell: kubectl delete pod dummy-pod --ignore-not-found
+    environment:
+      KUBECONFIG: /app/kubeconfig.embedded.yaml
+    ignore_errors: true
 
-    - name: Apply Kubernetes manifest using kubectl
-      shell: KUBECONFIG=/app/kubeconfig.embedded.yaml kubectl apply --validate=false -f /app/pod.yaml
-      register: output
-      failed_when: output.rc != 0
+  - name: Apply Kubernetes manifest using kubectl
+    shell: kubectl apply --validate=false -f /app/pod.yaml
+    environment:
+      KUBECONFIG: /app/kubeconfig.embedded.yaml
+    register: output
+    failed_when: output.rc != 0
