@@ -9,9 +9,8 @@ RUN curl -LO https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubect
 
 WORKDIR /app
 
-RUN mkdir -p /app/
 COPY playbook.yml entrypoint.sh kubeconfig.embedded.yaml /app/
-COPY pod.yaml /app/pod.yaml
+COPY pod.yaml /app/
 
 ENV KUBECONFIG=/app/kubeconfig.embedded.yaml
 
