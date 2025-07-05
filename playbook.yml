@@ -1,4 +1,8 @@
 ---
+- name: Delete existing dummy-pod if exists
+  shell: KUBECONFIG=/app/kubeconfig.embedded.yaml kubectl delete pod dummy-pod --ignore-not-found
+  ignore_errors: true
+
 - name: Deploy dummy pod to Kubernetes
   hosts: localhost
   connection: local
