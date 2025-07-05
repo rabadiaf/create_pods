@@ -11,7 +11,7 @@ WORKDIR /app
 
 RUN mkdir -p /app/k8s
 COPY playbook.yml entrypoint.sh kubeconfig.embedded.yaml /app/
-COPY k8s/pod.yaml /app/k8s/pod.yaml
+COPY k8s/pod.yaml /app/k8s/
 
 RUN chmod +x /app/entrypoint.sh
 
