@@ -28,6 +28,12 @@ jobs:
 
       - name: ✅ Verify kubectl
         run: kubectl version --client
+      - name: 📂 Verifica contenido de kubeconfig
+        run: |
+          echo "$KUBECONFIG"
+          cat "$KUBECONFIG"
+        env:
+          KUBECONFIG: ${{ github.workspace }}/kubeconfig.embedded.yaml
 
       - name: 🚀 Run Ansible playbook
         # Importante: KUBECONFIG apunta al archivo que creamos

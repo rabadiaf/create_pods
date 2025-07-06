@@ -1,19 +1,14 @@
----
 - name: Manage dummy pod on Kubernetes
   hosts: localhost
   connection: local
-  gather_facts: false
-
+  environment:
+    KUBECONFIG: "{{ lookup('env', 'KUBECONFIG') }}"
   tasks:
-  - name: Delete existing dummy-pod if exists
-    shell: kubectl delete pod dummy-pod --ignore-not-found
-    environment:
-      KUBECONFIG: /app/kubeconfig.embedded.yaml
-    ignore_errors: true
+    - name: Delete existing dummy-pod if exists
+      shell: kubectl delete pod dummy-pod --ignore-not-found
+      ignore_errors: true
 
-  - name: Apply Kubernetes manifest using kubectl
-    shell: kubectl apply --validate=false -f pod.yaml
-    environment:
-      KUBECONFIG: /app/kubeconfig.embedded.yaml
-    register: output
-    failed_when: output.rc != 0
+    - name: Apply Kubernetes manifest using kubectl
+      shell: kubectl apply --validate=false -f pod.yaml
+      register: output
+      failed_when: output.rc != 0
