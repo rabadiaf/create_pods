@@ -12,8 +12,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Run Ansible Playbook
+    - name: Run Ansible playbook to deploy pod
+      env:
+         KUBECONFIG: ${{ secrets.KUBECONFIG_CONTENT }}
       run: |
-        sudo apt-get update
-        sudo apt-get install -y ansible
-        ansible-playbook playbook.yml
+        ansible-playbook playbook.yml    
