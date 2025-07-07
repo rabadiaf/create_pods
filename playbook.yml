@@ -4,7 +4,7 @@
   environment:
     KUBECONFIG: "{{ lookup('env', 'KUBECONFIG') }}"
   tasks:
-    - name: Delete existing dummy-pod if exists
+    - name: Delete existing dummy-pod if exists.
       shell: kubectl delete pod dummy-pod --ignore-not-found
       ignore_errors: true
 
