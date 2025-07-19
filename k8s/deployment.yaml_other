@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabadiaf
+  labels:
+    app: rabadiaf
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: rabadiaf
+  template:
+    metadata:
+      labels:
+        app: rabadiaf
+    spec:
+      containers:
+      - name: rabadiaf-container
+        image: rabadiaf/github-actions
+        ports:
+        - containerPort: 80
+
