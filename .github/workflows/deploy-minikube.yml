@@ -11,8 +11,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: run script runner
-      run: ./actions-runner/run.sh
     - name: Run Ansible playbook to apply pod
       run: ansible-playbook k8s/deployment.yaml  
     - name: Deploy to Minikube
