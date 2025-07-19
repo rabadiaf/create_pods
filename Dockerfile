@@ -1,19 +1,15 @@
-FROM python:3.10-slim
+FROM node:18-slim
 
-RUN apt-get update && apt-get install -y curl ansible && rm -rf /var/lib/apt/lists/*
+# Crear un usuario sin privilegios
+RUN useradd -m rodolfo
 
-ENV KUBECTL_VERSION=v1.30.0
-RUN curl -LO https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl && \
-    install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
-    rm kubectl
+# Establecer ese usuario como el que ejecutará lo que sigue
+USER rodolfo
 
+# Directorio de trabajo
 WORKDIR /app
 
-COPY playbook.yml entrypoint.sh kubeconfig.embedded.yaml /app/
-COPY pod.yaml /app/
+# Copiar y ejecutar con ese usuario
+COPY . .
+CMD ["node", "app.js"]
 
-ENV KUBECONFIG=/app/kubeconfig.embedded.yaml
-
-RUN chmod +x /app/entrypoint.sh
-
-CMD ["/app/entrypoint.sh"]

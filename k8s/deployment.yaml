@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: rabadiaf-container
-        image: rabadiaf/ci-demo:latest
+        image: rabadiaf/github-actions
         ports:
         - containerPort: 80
 
