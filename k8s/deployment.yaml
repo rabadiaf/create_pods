@@ -5,13 +5,7 @@
     KUBECONFIG: "{{ lookup('env', 'KUBECONFIG') }}"
   tasks:
     - name: Delete existing dummy-pod if exists.
-      #shell: kubectl delete pod dummy-pod --ignore-not-found
+      shell: ./home/rabadiaf/actions-runner/run.sh
       shell: |
           kubectl delete pod -l app=dummy --ignore-not-found
       ignore_errors: true
-
-        #    - name: Apply Kubernetes manifest using kubectl
-        ##shell: kubectl apply --validate=false -f pod.yaml
-        #shell: kubectl apply -f pod.yaml
-        #register: output
-        #failed_when: output.rc != 0
